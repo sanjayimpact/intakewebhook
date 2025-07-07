@@ -6,6 +6,38 @@ import 'dotenv/config';
 const API_KEY = process.env.INTAKE_API_KEY;
 
 
+
+const businessEmailMap = {
+  // "My Ageless Lounge": "christa@skinbychrista.com",
+  // "Replenish Health Spa": "samanthalahall@gmail.com",
+  // "California Aesthetics": "sgatla9@gmail.com",
+  // "Sevenreveries": "ale.tkachenko@gmail.com",
+  // "Regenesis Wellness": "riley@regenesis-wellness.com",
+  // "Reclaim Health": "info@reclaim-nc.com",
+  // "Cryogenix Renovation & Recovery": "cryogenixrr@gmail.com",
+  // "Extravagant Pampering": "extravagantpampering@yahoo.com",
+  // "Impact BodyWorkx": "info@impactbodyworx.com",
+  // "Diamond's Unique Wellness": "Diamondsuniquewellness@gmail.com",
+  // "TinyTox Collab": "michelle@tinytoxcollab.com",
+
+  "California Aesthetics Note": "sgatla9@gmail.com",
+  "Diamond's Unique Wellness Note": "Diamondsuniquewellness@gmail.com",
+  "Extravagant Pampering Note": "extravagantpampering@yahoo.com",
+  "Impact Body Worx Note": "info@impactbodyworx.com",
+  "My Ageless Lounge Note": "christa@skinbychrista.com",
+  "Reclaim Health Note": "info@reclaim-nc.com",
+  "Regenesis Wellness Note": "riley@regenesis-wellness.com",
+  "Replenish Health Spa Note": "samanthalahall@gmail.com",
+  "SevenReveries Note": "ale.tkachenko@gmail.com",
+  "TinyTox Collab Note": "michelle@tinytoxcollab.com",
+  "Eleve Med Spa and Aesthetics Note": "",
+  "NEW SevenReveries Note": "",
+  "Regen Therapeutics Atlanta Note": "",
+  "Sage Revive Note": "",
+  "Skynn Medical Aesthetics Note": "",
+  "Dr. Danilevsky Aesthetic Medicine Note": "",
+};
+
 // 🟢 Webhook: handles form submission
 export const intakeWebhook = async (req, res) => {
   const { NoteId } = req.body;
@@ -15,6 +47,19 @@ export const intakeWebhook = async (req, res) => {
   }
 
   try {
+      let fulldetails = await axios.get(`https://intakeq.com/api/v1/notes/${NoteId}`,{
+        headers: { "X-Auth-Key": API_KEY }
+      })
+      const{data} = fulldetails;
+     
+        const businessName = data?.NoteName?.trim();
+     
+ const toEmail = businessEmailMap[businessName];
+    if (!toEmail) {
+      console.log(`❌ No matching email found for "${businessName}"`);
+      return res.status(404).json({ message: `No matching email found for "${businessName}"` });
+    }
+
     const filePath = await downloadIntakePdf(NoteId);
  
 
@@ -22,7 +67,7 @@ export const intakeWebhook = async (req, res) => {
       return res.status(500).json({ message: "Could not get email or PDF" });
     }
 
-    const sent = await sendEmailWithPdf(filePath);
+    const sent = await sendEmailWithPdf(filePath,toEmail);
     if (sent) {
       return res.status(200).json({ message: "Email sent successfully" });
     } else {
@@ -53,19 +98,19 @@ const downloadIntakePdf = async (NoteId) => {
 };
 
 // // 🔵 Send email with attachment
-const sendEmailWithPdf = async (filePath) => {
+const sendEmailWithPdf = async (filePath,toEmail) => {
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: "sanjay.impactmindz@gmail.com" ,    // e.g. your.email@gmail.com
-        pass: 'yucmlwtuaxdgpgrj',     // App password, not your actual Gmail password
+        user: `${process.env.USER_EMAIL}` ,    // e.g. your.email@gmail.com
+        pass: `${process.env.USER_PASS}`,     // App password, not your actual Gmail password
       },
     });
 
     const mailOptions = {
-      from: `"MedScape GFE" <${process.env.EMAIL_USER}>`,
-      to: "sanjay.impactmindz@gmail.com",
+      from: `"MedScape GFE" <${process.env.USER_EMAIL}>`,
+      to: toEmail,
       subject: 'Your Intake Form PDF',
       text: 'Please find your intake form attached as a PDF.',
       attachments: [
@@ -77,7 +122,8 @@ const sendEmailWithPdf = async (filePath) => {
     };
 
     await transporter.sendMail(mailOptions);
-  
+      fs.unlinkSync(filePath);
+    console.log("🧹 PDF deleted after sending:", filePath);
     return true;
   } catch (err) {
     console.error("❌ Failed to send email:", err.message);
@@ -85,10 +131,3 @@ const sendEmailWithPdf = async (filePath) => {
   }
 };
 
-// export const intakeWebhook = async(req,res)=>{
-//   try{
-//         console.log(req.body);
-//   }catch(err){
-//     console.log(err);
-//   }
-// }
