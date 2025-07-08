@@ -8,34 +8,24 @@ const API_KEY = process.env.INTAKE_API_KEY;
 
 
 const businessEmailMap = {
-  // "My Ageless Lounge": "christa@skinbychrista.com",
-  // "Replenish Health Spa": "samanthalahall@gmail.com",
-  // "California Aesthetics": "sgatla9@gmail.com",
-  // "Sevenreveries": "ale.tkachenko@gmail.com",
-  // "Regenesis Wellness": "riley@regenesis-wellness.com",
-  // "Reclaim Health": "info@reclaim-nc.com",
-  // "Cryogenix Renovation & Recovery": "cryogenixrr@gmail.com",
-  // "Extravagant Pampering": "extravagantpampering@yahoo.com",
-  // "Impact BodyWorkx": "info@impactbodyworx.com",
-  // "Diamond's Unique Wellness": "Diamondsuniquewellness@gmail.com",
-  // "TinyTox Collab": "michelle@tinytoxcollab.com",
-
+ 
+  "My Ageless Lounge Note": "christa@skinbychrista.com",
+  "Replenish Health Spa Note": "samanthalahall@gmail.com",
   "California Aesthetics Note": "sgatla9@gmail.com",
-  "Diamond's Unique Wellness Note": "Diamondsuniquewellness@gmail.com",
+  "SevenReveries Note": "ale.tkachenko@gmail.com",
+  "Regenesis Wellness Note": "riley@regenesis-wellness.com",
+  "Reclaim Health Note": "info@reclaim-nc.com",
+  "Cryogenix Renovation & Recovery":"cryogenixrr@gmail.com",
   "Extravagant Pampering Note": "extravagantpampering@yahoo.com",
   "Impact Body Worx Note": "info@impactbodyworx.com",
-  "My Ageless Lounge Note": "christa@skinbychrista.com",
-  "Reclaim Health Note": "info@reclaim-nc.com",
-  "Regenesis Wellness Note": "riley@regenesis-wellness.com",
-  "Replenish Health Spa Note": "samanthalahall@gmail.com",
-  "SevenReveries Note": "ale.tkachenko@gmail.com",
+  "Vita Nova Medical Note":"info@vitanovamedical.com",
+  "Diamond's Unique Wellness Note": "Diamondsuniquewellness@gmail.com",
   "TinyTox Collab Note": "michelle@tinytoxcollab.com",
-  "Eleve Med Spa and Aesthetics Note": "",
-  "NEW SevenReveries Note": "",
-  "Regen Therapeutics Atlanta Note": "",
-  "Sage Revive Note": "",
-  "Skynn Medical Aesthetics Note": "",
-  "Dr. Danilevsky Aesthetic Medicine Note": "",
+  "Regen Therapeutics Atlanta Note":"nsprphg@gmail.com",
+  "Acne Clinic Note":"sevaramatyakubova44@gmail.com",
+  "Sage Revive Note":"rjmalhotra@gmail.com",
+  "Endorphin Med Note":"endorphinmedcorp@gmail.com"
+ 
 };
 
 // 🟢 Webhook: handles form submission
@@ -51,7 +41,7 @@ export const intakeWebhook = async (req, res) => {
         headers: { "X-Auth-Key": API_KEY }
       })
       const{data} = fulldetails;
-     
+  
         const businessName = data?.NoteName?.trim();
      
  const toEmail = businessEmailMap[businessName];
