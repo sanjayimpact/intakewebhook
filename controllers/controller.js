@@ -3,6 +3,8 @@ import fs from 'fs';
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
 
+
+
 const API_KEY = process.env.INTAKE_API_KEY;
 
 
@@ -78,7 +80,7 @@ const downloadIntakePdf = async (NoteId) => {
       responseType: 'arraybuffer',
     });
 
-    const filePath = `./pdfs/intake-${NoteId}.pdf`;
+    const filePath = `intake-${NoteId}.pdf`;
     fs.writeFileSync(filePath, res.data);
     console.log("✅ PDF downloaded:", filePath);
     return filePath;
