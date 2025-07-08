@@ -31,6 +31,7 @@ const businessEmailMap = {
 // 🟢 Webhook: handles form submission
 export const intakeWebhook = async (req, res) => {
   const { NoteId } = req.body;
+  console.log(req.body);
 
   if (!NoteId) {
     return res.status(400).json({ message: "Missing IntakeId from webhook" });
