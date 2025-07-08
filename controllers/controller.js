@@ -99,10 +99,10 @@ const sendEmailWithPdf = async (filePath,toEmail) => {
     });
 
     const mailOptions = {
-      from: `"MedScape GFE" <${process.env.USER_EMAIL}>`,
-      to: toEmail,
-      subject: 'Your Intake Form PDF',
-      text: 'Please find your intake form attached as a PDF.',
+      from: `"MedScape GFE" <info@medscapegfe.com>`,
+      to: "sanjubora84@gmail.com",
+      subject: 'Your Intake Note PDF',
+      text: 'Please find your intake Note attached as a PDF.',
       attachments: [
         {
           filename: filePath.split("/").pop(),
