@@ -15,6 +15,7 @@ const businessEmailMap = {
   "Replenish Health Spa Note": "samanthalahall@gmail.com",
   "California Aesthetics Note": "sgatla9@gmail.com",
   "SevenReveries Note": "ale.tkachenko@gmail.com",
+  "New SevenReveries Note": "ale.tkachenko@gmail.com",
   "Regenesis Wellness Note": "riley@regenesis-wellness.com",
   "Reclaim Health Note": "info@reclaim-nc.com",
   "Cryogenix Renovation & Recovery":"cryogenixrr@gmail.com",
@@ -26,7 +27,7 @@ const businessEmailMap = {
   "Regen Therapeutics Atlanta Note":"nsprphg@gmail.com",
   "Acne Clinic Note":"sevaramatyakubova44@gmail.com",
   "Sage Revive Note":"rjmalhotra@gmail.com",
-  "Endorphin Med Note":"endorphinmedcorp@gmail.com"
+  "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com"
  
 };
 
