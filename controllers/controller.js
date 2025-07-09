@@ -27,7 +27,8 @@ const businessEmailMap = {
   "Regen Therapeutics Atlanta Note":"nsprphg@gmail.com",
   "Acne Clinic Note":"sevaramatyakubova44@gmail.com",
   "Sage Revive Note":"rjmalhotra@gmail.com",
-  "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com"
+  "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com",
+  "Sample Note for Testing":"admin@aderishealth.com"
  
 };
 
@@ -48,7 +49,7 @@ export const intakeWebhook = async (req, res) => {
   
         const businessName = data?.NoteName?.trim();
      
- const toEmail = businessEmailMap[businessName];
+    const toEmail = businessEmailMap[businessName];
     if (!toEmail) {
       console.log(`❌ No matching email found for "${businessName}"`);
       return res.status(404).json({ message: `No matching email found for "${businessName}"` });
@@ -105,8 +106,8 @@ const sendEmailWithPdf = async (filePath,toEmail) => {
     const mailOptions = {
       from: `"MedScape GFE" <info@medscapegfe.com>`,
       to: "sanjubora84@gmail.com",
-      subject: 'Your Intake Note PDF',
-      text: 'Please find your intake Note attached as a PDF.',
+      subject: 'GFE Documentation – PDF Attached',
+      text: 'Please find the GFE note attached in PDF format for your reference',
       attachments: [
         {
           filename: filePath.split("/").pop(),
