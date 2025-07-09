@@ -105,7 +105,7 @@ const sendEmailWithPdf = async (filePath,toEmail) => {
 
     const mailOptions = {
       from: `"MedScape GFE" <info@medscapegfe.com>`,
-      to: "sanjubora84@gmail.com",
+      to: "admin@aderishealth.com",
       subject: 'GFE Documentation – PDF Attached',
       text: 'Please find the GFE note attached in PDF format for your reference',
       attachments: [
