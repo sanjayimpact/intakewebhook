@@ -50,6 +50,8 @@ export const intakeWebhook = async (req, res) => {
         const businessName = data?.NoteName?.trim();
      
     const toEmail = businessEmailMap[businessName];
+    console.log(toEmail);
+
     if (!toEmail) {
       console.log(`❌ No matching email found for "${businessName}"`);
       return res.status(404).json({ message: `No matching email found for "${businessName}"` });
@@ -105,7 +107,7 @@ const sendEmailWithPdf = async (filePath,toEmail) => {
 
     const mailOptions = {
       from: `"MedScape GFE" <info@medscapegfe.com>`,
-      to: "admin@aderishealth.com",
+      to: toEmail,
       subject: 'GFE Documentation – PDF Attached',
       text: 'Please find the GFE note attached in PDF format for your reference',
       attachments: [
