@@ -33,6 +33,30 @@ const businessEmailMap = {
  
 };
 
+
+//form map
+const businessFormMap = {
+  "My Ageless Lounge Intake Form": "christa@skinbychrista.com",
+  "Replenish Health Spa Intake Form": "samanthalahall@gmail.com",
+  "California Aesthetics Intake Form": "sgatla9@gmail.com",
+  "SevenReveries Intake Form": "ale.tkachenko@gmail.com",
+  "New SevenReveries Intake Form": "ale.tkachenko@gmail.com",
+  "Regenesis Wellness Intake Form": "riley@regenesis-wellness.com",
+  "Reclaim Health Intake Form": "info@reclaim-nc.com",
+  "Cryogenix Rejuvenation & Recovery Intake Form": "cryogenixrr@gmail.com",
+  "Extravagant Pampering Intake Form": "extravagantpampering@yahoo.com",
+  "Impact Body Worx Intake Form": "info@impactbodyworx.com",
+  "Vita Nova Medical Intake Form": "info@vitanovamedical.com",
+  "Diamond's Unique Wellness Intake Form": "Diamondsuniquewellness@gmail.com",
+  "TinyTox Collab Intake Form": "tinytoxcollab@gmail.com",
+  "Regen Therapeutics Atlanta Intake Form": "nsprphg@gmail.com",
+  "AcneClinicNYC Intake Form": "sevaramatyakubova44@gmail.com",
+  "Sage Revive Intake Form": ["rjmalhotra@gmail.com", "ashleyholliday@sagerevivemoorestown.com"],
+  "Dr. Danilevsky Aesthetic Medicine Intake Form": "endorphinmedcorp@gmail.com",
+};
+
+
+
 // 🟢 Webhook: handles form submission
 export const intakeWebhook = async (req, res) => {
   const { NoteId } = req.body;
@@ -129,3 +153,61 @@ const sendEmailWithPdf = async (filePath,toEmail) => {
   }
 };
 
+
+export const sendNotificationwebhook = async(req,res)=>{
+
+ const {IntakeId} = req.body;
+  try{
+         let fulldetails = await axios.get(`https://intakeq.com/api/v1/intakes/${IntakeId}`,{
+        headers: { "X-Auth-Key": API_KEY }
+      })
+
+      const {data} = fulldetails;
+      const businessName = data?.QuestionnaireName?.trim();
+      
+    const toEmail = businessFormMap[businessName];
+    console.log(toEmail);
+ if (!toEmail) {
+      console.log(`❌ No matching email found for "${businessName}"`);
+      return res.status(404).json({ message: `No matching email found for "${businessName}"` });
+    }
+      
+  const sent = await sendEmail(toEmail);
+if (sent) {
+      return res.status(200).json({ message: "Email sent successfully" });
+    } else {
+      return res.status(500).json({ message: "Failed to send email" });
+    }
+  }catch(err){
+    console.log(err);
+  }
+}
+
+
+
+const sendEmail = async (toEmail) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: `${process.env.USER_EMAIL}` ,    // e.g. your.email@gmail.com
+        pass: `${process.env.USER_PASS}`,     // App password, not your actual Gmail password
+      },
+    });
+
+    const mailOptions = {
+      from: `"MedScape GFE" <info@medscapegfe.com>`,
+      to: toEmail,
+      subject: 'GFE Documentation – PDF Attached',
+      text: 'demo',
+      
+    };
+
+    await transporter.sendMail(mailOptions);
+  
+    return true;
+  } catch (err) {
+    console.error("❌ Failed to send email:", err.message);
+    return false;
+  }
+};
