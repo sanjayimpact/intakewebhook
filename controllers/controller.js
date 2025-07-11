@@ -30,7 +30,7 @@ const businessEmailMap = {
   "Sage Revive Documentation Note":["rjmalhotra@gmail.com","ashleyholliday@sagerevivemoorestown.com"],
   "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com",
   "Skynn Medical Aesthetics Note":"briannefaas123@gmail.com",
-  "Sample Note for Testing":["sanjubora84@gmail.com","borasanju91@gmail.com"]
+  "Sample Note for TESTING":["sanjubora84@gmail.com","borasanju91@gmail.com"]
  
 };
 
@@ -168,8 +168,7 @@ export const sendNotificationwebhook = async(req,res)=>{
       const businessName = data?.QuestionnaireName?.trim();
       
     const toEmail = businessFormMap[businessName];
-    console.log(toEmail);
- 
+
  if (!toEmail) {
       console.log(`❌ No matching email found for "${businessName}"`);
       return res.status(404).json({ message: `No matching email found for "${businessName}"` });
