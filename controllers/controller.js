@@ -26,9 +26,9 @@ const businessEmailMap = {
   "TinyTox Collab Note": "tinytoxcollab@gmail.com",
   "Regen Therapeutics Atlanta Note":"nsprphg@gmail.com",
   "Acne Clinic Note":"sevaramatyakubova44@gmail.com",
-  "Sage Revive Note":"rjmalhotra@gmail.com",
+  "Sage Revive Note":["rjmalhotra@gmail.com","ashleyholliday@sagerevivemoorestown.com"],
   "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com",
-  // "Sample Note for Testing":"admin@aderishealth.com",
+  
   "Sample Note for Testing":["sanjubora84@gmail.com","borasanju91@gmail.com"]
  
 };
