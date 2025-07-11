@@ -37,7 +37,7 @@ const businessEmailMap = {
 //form map
 const businessFormMap = {
   "My Ageless Lounge Intake Form": "christa@skinbychrista.com",
-  "Replenish Health Spa Intake Form": "samanthalahall@gmail.com",
+  "Replenish Health Spa Intake Form": "Sam@replenishhealthspa.com",
   "California Aesthetics Intake Form": "sgatla9@gmail.com",
   "SevenReveries Intake Form": "ale.tkachenko@gmail.com",
   "New SevenReveries Intake Form": "ale.tkachenko@gmail.com",
