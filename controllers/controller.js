@@ -23,12 +23,13 @@ const businessEmailMap = {
   "Impact Body Worx Note": "info@impactbodyworx.com",
   "Vita Nova Medical Note":"info@vitanovamedical.com",
   "Diamond's Unique Wellness Note": "Diamondsuniquewellness@gmail.com",
-  "TinyTox Collab Note": "michelle@tinytoxcollab.com",
+  "TinyTox Collab Note": "tinytoxcollab@gmail.com",
   "Regen Therapeutics Atlanta Note":"nsprphg@gmail.com",
   "Acne Clinic Note":"sevaramatyakubova44@gmail.com",
   "Sage Revive Note":"rjmalhotra@gmail.com",
   "Dr. Danilevsky Aesthetic Medicine Note":"endorphinmedcorp@gmail.com",
-  "Sample Note for Testing":"admin@aderishealth.com"
+  // "Sample Note for Testing":"admin@aderishealth.com",
+  "Sample Note for Testing":["sanjubora84@gmail.com","borasanju91@gmail.com"]
  
 };
 
